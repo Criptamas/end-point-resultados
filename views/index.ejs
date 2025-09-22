@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .lottery { margin-bottom: 40px; }
+    .lottery h2 { color: #333; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin: 10px; display: inline-block; width: 250px; vertical-align: top; }
+    .card img { max-width: 100px; height: auto; }
+    .card h3 { margin: 8px 0; }
+    .card p { margin: 4px 0; }
+    .container { display: flex; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <h1><%= title %></h1>
+  <% if (lotteries.length > 0) { %>
+    <% lotteries.forEach(lottery => { %>
+      <div class="lottery">
+        <h2><%= lottery.lotteryName %></h2>
+        <div class="container">
+          <% lottery.results.forEach(result => { %>
+            <div class="card">
+              <% if (result.image) { %>
+                <img src="<%= result.image %>" alt="<%= result.name %>">
+              <% } %>
+              <h3><%= result.name %></h3>
+              <p><strong>Hora:</strong> <%= result.time %></p>
+              <p><strong>Número:</strong> <%= result.number %></p>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+    <% }); %>
+  <% } else { %>
+    <p>No hay resultados disponibles.</p>
+  <% } %>
+</body>
+</html>
