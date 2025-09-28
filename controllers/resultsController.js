@@ -14,6 +14,15 @@ class ResultsController {
       // Obtener resultados usando el servicio de scraping
       const { results: lotteries, isToday } = await scraperService.getResults();
 
+      // Verificar si no hay resultados
+      if (lotteries.length === 0) {
+        return res.json({
+          message: "No hay resultados disponibles",
+          isToday,
+          title: isToday ? "Resultados del Día" : "Resultados del Día Anterior",
+        });
+      }
+
       // Devolver JSON con los datos
       res.json({
         lotteries,
