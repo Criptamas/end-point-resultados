@@ -37,7 +37,10 @@ class ScraperService {
 
       // Basado en la estructura HTML proporcionada, extraer de cada lotería
       const lotteries = [];
-      $(".col-md-8.col-sm-12.resultados").each((index, lotteryElement) => {
+      const selector = url.includes("ayer")
+        ? ".resultados"
+        : ".col-md-8.col-sm-12.resultados";
+      $(selector).each((index, lotteryElement) => {
         const $lottery = $(lotteryElement);
         // Nombre de la lotería
         const lotteryName = $lottery.find("h2.lotResTit").text().trim();
